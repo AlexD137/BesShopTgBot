@@ -1,37 +1,30 @@
 package ru.jmdevelop.besshoptgbot.models.dom;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
+
 import java.util.Objects;
 
+@Getter
+@ToString
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class MessagePlaceholder {
-
     private final String placeholder;
     private final Object replacement;
 
-    private MessagePlaceholder(String placeholder, Object replacement) {
-        this.placeholder = placeholder;
-        this.replacement = replacement;
-    }
-
     public static MessagePlaceholder of(String placeholder, Object replacement) {
-        return new MessagePlaceholder(placeholder, replacement);
-    }
-
-    public String getPlaceholder() {
-        return placeholder;
-    }
-
-    public Object getReplacement() {
-        return replacement;
+        return new MessagePlaceholder(
+                Objects.requireNonNull(placeholder, "Placeholder cannot be null"),
+                Objects.requireNonNull(replacement, "Replacement cannot be null")
+        );
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         MessagePlaceholder that = (MessagePlaceholder) o;
         return Objects.equals(placeholder, that.placeholder) &&
                 Objects.equals(replacement, that.replacement);
@@ -41,11 +34,4 @@ public class MessagePlaceholder {
     public int hashCode() {
         return Objects.hash(placeholder, replacement);
     }
-
-    @Override
-    public String toString() {
-        return "MessagePlaceholder [placeholder=" + placeholder +
-                ", replacement=" + replacement + "]";
-    }
-
 }

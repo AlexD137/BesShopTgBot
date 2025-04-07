@@ -4,6 +4,8 @@ package ru.jmdevelop.besshoptgbot.main;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.DefaultBotOptions;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -21,7 +23,11 @@ import java.util.Map;
 import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.toMap;
 
+@Component
 public class TelegramBot extends TelegramLongPollingBot {
+
+
+
 
     private final Logger logger = LogManager.getLogger(getClass());
 
@@ -31,13 +37,14 @@ public class TelegramBot extends TelegramLongPollingBot {
     private final Map<Command, ActionHandler> actionHandlers;
 
     public TelegramBot(
-            ConfigReader configReader,
+            @Value("${telegram.bot.token}") String botToken,
+            @Value("${telegram.bot.username}") String botUsername,
             ClientActionRepository clientActionRepository,
             List<UpdateHandler> updateHandlers,
             List<ActionHandler> actionHandlers) {
 
-        super(new DefaultBotOptions(), configReader.get("telegram.bot.token"));
-        this.telegramBotUsername = configReader.get("telegram.bot.username");
+        super(new DefaultBotOptions(), botToken);
+        this.telegramBotUsername = "telegram.bot.username";
         this.clientActionRepository = clientActionRepository;
         this.updateHandlers = updateHandlers.stream().collect(toMap(UpdateHandler::getCommand, identity()));
         this.actionHandlers = actionHandlers.stream().collect(toMap(ActionHandler::getCommand, identity()));

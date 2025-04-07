@@ -1,16 +1,24 @@
 package ru.jmdevelop.besshoptgbot.models.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
+import lombok.experimental.Accessors;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Table(name = "orders")
+@Getter
+@Setter
+@ToString(exclude = {"client", "items"})
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@NoArgsConstructor
+@AllArgsConstructor
+@Accessors(chain = true)
 public class Order implements Serializable {
 
     @Serial
@@ -19,6 +27,7 @@ public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "orders_seq")
     @SequenceGenerator(name = "orders_seq", sequenceName = "orders_id_seq", allocationSize = 1)
+    @EqualsAndHashCode.Include
     private Integer id;
 
     @OneToOne(fetch = FetchType.LAZY)
@@ -35,91 +44,19 @@ public class Order implements Serializable {
     @Column(nullable = false)
     private Long amount;
 
-    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> items = new ArrayList<>();
 
-    public Order() {
+
+    public Order addItem(OrderItem item) {
+        items.add(item);
+        item.setOrder(this);
+        return this;
     }
 
-    public Integer getId() {
-        return id;
+    public Order removeItem(OrderItem item) {
+        items.remove(item);
+        item.setOrder(null);
+        return this;
     }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    public LocalDateTime getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(LocalDateTime createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public OrderStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(OrderStatus status) {
-        this.status = status;
-    }
-
-    public Long getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Long amount) {
-        this.amount = amount;
-    }
-
-    public List<OrderItem> getItems() {
-        return items;
-    }
-
-    public void setItems(List<OrderItem> items) {
-        for (OrderItem item : items) {
-            item.setOrder(this);
-            this.items.add(item);
-        }
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Order order = (Order) o;
-        return Objects.equals(id, order.id) &&
-                Objects.equals(client, order.client) &&
-                Objects.equals(createdDate, order.createdDate) &&
-                status == order.status &&
-                Objects.equals(amount, order.amount);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, client, createdDate, status, amount);
-    }
-
-    @Override
-    public String toString() {
-        return "Order [id=" + id +
-                ", client=" + client +
-                ", createdDate=" + createdDate +
-                ", status=" + status +
-                ", amount=" + amount + "]";
-    }
-
 }
