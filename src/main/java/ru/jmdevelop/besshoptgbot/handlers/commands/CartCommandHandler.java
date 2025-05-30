@@ -1,5 +1,7 @@
 package ru.jmdevelop.besshoptgbot.handlers.commands;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
@@ -18,51 +20,23 @@ import ru.jmdevelop.besshoptgbot.models.entity.Client;
 import ru.jmdevelop.besshoptgbot.repo.CartRepository;
 import ru.jmdevelop.besshoptgbot.repo.ClientCommandStateRepository;
 import ru.jmdevelop.besshoptgbot.repo.ClientOrderStateRepository;
-import ru.jmdevelop.besshoptgbot.repo.ClientRepository;
+import ru.jmdevelop.besshoptgbot.repo.jpa.ClientRepository;
+import ru.jmdevelop.besshoptgbot.services.CartService;
 import ru.jmdevelop.besshoptgbot.services.MessageService;
+import ru.jmdevelop.besshoptgbot.services.TelegramService;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
+@Component
+@RequiredArgsConstructor
 public class CartCommandHandler implements CommandHandler, UpdateHandler {
 
-    private static final int MAX_QUANTITY_PER_PRODUCT = 50;
 
-    private static final String PRODUCT_QUANTITY_CALLBACK = "cart=product-quantity";
-    private static final String CURRENT_PAGE_CALLBACK = "cart=current-page";
-    private static final String DELETE_PRODUCT_CALLBACK = "cart=delete-product";
-    private static final String MINUS_PRODUCT_CALLBACK = "cart=minus-product";
-    private static final String PLUS_PRODUCT_CALLBACK = "cart=plus-product";
-    private static final String PREVIOUS_PRODUCT_CALLBACK = "cart=previous-product";
-    private static final String NEXT_PRODUCT_CALLBACK = "cart=next-product";
-    private static final String PROCESS_ORDER_CALLBACK = "cart=process-order";
+    private final CartService cartService;
+    private final TelegramService telegramService;
 
-    private static final Set<String> CALLBACKS = Set.of(DELETE_PRODUCT_CALLBACK, MINUS_PRODUCT_CALLBACK,
-            PLUS_PRODUCT_CALLBACK, PREVIOUS_PRODUCT_CALLBACK, NEXT_PRODUCT_CALLBACK, PROCESS_ORDER_CALLBACK);
-
-    private final CommandHandlerRegistry commandHandlerRegistry;
-    private final ClientCommandStateRepository clientCommandStateRepository;
-    private final ClientOrderStateRepository clientOrderStateRepository;
-    private final CartRepository cartRepository;
-    private final ClientRepository clientRepository;
-    private final MessageService messageService;
-
-    public CartCommandHandler(
-            CommandHandlerRegistry commandHandlerRegistry,
-            ClientCommandStateRepository clientCommandStateRepository,
-            ClientOrderStateRepository clientOrderStateRepository,
-            CartRepository cartRepository,
-            ClientRepository clientRepository,
-            MessageService messageService) {
-
-        this.commandHandlerRegistry = commandHandlerRegistry;
-        this.clientCommandStateRepository = clientCommandStateRepository;
-        this.clientOrderStateRepository = clientOrderStateRepository;
-        this.cartRepository = cartRepository;
-        this.clientRepository = clientRepository;
-        this.messageService = messageService;
-    }
 
     @Override
     public Command getCommand() {
@@ -96,7 +70,7 @@ public class CartCommandHandler implements CommandHandler, UpdateHandler {
     }
 
     private boolean isCallbackQueryUpdate(Update update) {
-        return update.hasCallbackQuery() && CALLBACKS.contains(update.getCallbackQuery().getData());
+        return update.hasCallbackQuery() && update.getCallbackQuery().getData().startsWith("cart_");
     }
 
     private void handleCartMessageUpdate(AbsSender absSender, Long chatId) throws TelegramApiException {

@@ -23,7 +23,7 @@ public class Product implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "products_seq")
     @SequenceGenerator(name = "products_seq", sequenceName = "products_id_seq", allocationSize = 1)
     @EqualsAndHashCode.Include
-    private Integer id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")

@@ -1,5 +1,6 @@
 package ru.jmdevelop.besshoptgbot.handlers.commands;
 
+import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.bots.AbsSender;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
@@ -9,6 +10,7 @@ import ru.jmdevelop.besshoptgbot.handlers.commands.register.CommandHandlerRegist
 import ru.jmdevelop.besshoptgbot.models.dom.Button;
 import ru.jmdevelop.besshoptgbot.models.dom.Command;
 import ru.jmdevelop.besshoptgbot.repo.ClientCommandStateRepository;
+
 
 public class OrderStepPreviousCommandHandler implements UpdateHandler {
 

@@ -1,5 +1,7 @@
 package ru.jmdevelop.besshoptgbot.handlers.commands;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.bots.AbsSender;
@@ -8,21 +10,15 @@ import ru.jmdevelop.besshoptgbot.handlers.UpdateHandler;
 import ru.jmdevelop.besshoptgbot.models.dom.Button;
 import ru.jmdevelop.besshoptgbot.models.dom.Command;
 import ru.jmdevelop.besshoptgbot.models.entity.Client;
-import ru.jmdevelop.besshoptgbot.repo.ClientRepository;
+import ru.jmdevelop.besshoptgbot.repo.jpa.ClientRepository;
 import ru.jmdevelop.besshoptgbot.services.MessageService;
 
+@Component
+@RequiredArgsConstructor
 public class StartCommandHandler implements UpdateHandler {
 
     private final ClientRepository clientRepository;
     private final MessageService messageService;
-
-    public StartCommandHandler(
-            ClientRepository clientRepository,
-            MessageService messageService) {
-
-        this.clientRepository = clientRepository;
-        this.messageService = messageService;
-    }
 
     @Override
     public Command getCommand() {
@@ -63,7 +59,7 @@ public class StartCommandHandler implements UpdateHandler {
 
     private void activateClient(Client client) {
         client.setActive(true);
-        clientRepository.update(client);
+        clientRepository.save(client);
     }
 
     private void sendStartMessage(AbsSender absSender, Long chatId) throws TelegramApiException {

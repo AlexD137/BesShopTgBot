@@ -1,8 +1,9 @@
 package ru.jmdevelop.besshoptgbot.services.impl;
 
 import org.apache.commons.lang3.SerializationUtils;
+import org.springframework.stereotype.Component;
 import ru.jmdevelop.besshoptgbot.models.entity.Message;
-import ru.jmdevelop.besshoptgbot.repo.MessageRepository;
+import ru.jmdevelop.besshoptgbot.repo.jpa.MessageRepository;
 import ru.jmdevelop.besshoptgbot.repo.database.MessageRepositoryDefault;
 import ru.jmdevelop.besshoptgbot.services.MessageService;
 
@@ -12,6 +13,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+@Component
 public class MessageServiceDefault implements MessageService {
 
     private MessageRepository messageRepository = new MessageRepositoryDefault();

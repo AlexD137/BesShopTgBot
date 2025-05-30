@@ -25,8 +25,8 @@ import ru.jmdevelop.besshoptgbot.models.entity.Category;
 import ru.jmdevelop.besshoptgbot.models.entity.Message;
 import ru.jmdevelop.besshoptgbot.models.entity.Product;
 import ru.jmdevelop.besshoptgbot.repo.CartRepository;
-import ru.jmdevelop.besshoptgbot.repo.CategoryRepository;
-import ru.jmdevelop.besshoptgbot.repo.ProductRepository;
+import ru.jmdevelop.besshoptgbot.repo.jpa.CategoryRepository;
+import ru.jmdevelop.besshoptgbot.repo.jpa.ProductRepository;
 import ru.jmdevelop.besshoptgbot.services.MessageService;
 
 import java.util.Arrays;

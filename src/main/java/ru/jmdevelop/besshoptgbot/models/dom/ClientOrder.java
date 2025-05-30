@@ -2,6 +2,7 @@ package ru.jmdevelop.besshoptgbot.models.dom;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serial;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Getter
+@Setter
 @ToString
 @RequiredArgsConstructor
 public class ClientOrder implements Serializable {

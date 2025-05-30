@@ -18,7 +18,9 @@ import ru.jmdevelop.besshoptgbot.models.entity.Order;
 import ru.jmdevelop.besshoptgbot.models.entity.OrderItem;
 import ru.jmdevelop.besshoptgbot.models.entity.OrderStatus;
 import ru.jmdevelop.besshoptgbot.repo.hibernate.HibernateTransactionFactory;
-import ru.jmdevelop.besshoptgbot.repo.*;
+import ru.jmdevelop.besshoptgbot.repo.jpa.ClientRepository;
+import ru.jmdevelop.besshoptgbot.repo.jpa.OrderRepository;
+import ru.jmdevelop.besshoptgbot.repo.CartRepository;
 import ru.jmdevelop.besshoptgbot.services.MessageService;
 import ru.jmdevelop.besshoptgbot.services.NotificationService;
 
