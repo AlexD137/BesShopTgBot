@@ -38,7 +38,7 @@ public class UpdateDispatcher {
         try {
             handler.handle(update, sender);
         } catch (TelegramApiException e) {
-            throw new UpdateProcessingException("Handler execution failed", e);
+            throw new RuntimeException("Handler execution failed", e);
         }
     }
 

@@ -3,7 +3,6 @@ package ru.jmdevelop.besshoptgbot.repo.redis;
 import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
-import ru.jmdevelop.besshoptgbot.models.dom.Command;
 import ru.jmdevelop.besshoptgbot.repo.ClientCommandStateRepository;
 import java.util.concurrent.TimeUnit;
 

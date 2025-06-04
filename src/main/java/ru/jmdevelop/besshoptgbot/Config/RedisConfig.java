@@ -8,7 +8,6 @@ import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSeriali
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import ru.jmdevelop.besshoptgbot.models.dom.ClientAction;
 import ru.jmdevelop.besshoptgbot.models.dom.ClientOrder;
-import ru.jmdevelop.besshoptgbot.models.dom.Command;
 
 @Configuration
 public class RedisConfig {
