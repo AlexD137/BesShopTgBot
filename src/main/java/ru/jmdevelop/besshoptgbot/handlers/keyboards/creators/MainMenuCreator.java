@@ -22,16 +22,21 @@ public class MainMenuCreator implements KeyboardCreator {
 
     @Override
     public ReplyKeyboardMarkup createKeyboard(Long chatId) {
-        userContext.pushState(chatId, KeyboardType.MAIN_MENU);
+        userContext.pushMenuState(chatId, KeyboardType.MAIN_MENU);
 
         return ReplyKeyboardMarkup.builder()
                 .keyboard(List.of(
                         new KeyboardRow(List.of(
-                                new KeyboardButton("🛍️ Каталог"),
+                                new KeyboardButton("\uD83D\uDECD\uFE0F Каталог")
+                        )),
+                        new KeyboardRow(List.of(
                                 new KeyboardButton("🆘 Поддержка")
                         )),
                         new KeyboardRow(List.of(
-                                new KeyboardButton("⚠ Жалоба"),
+                                new KeyboardButton("\uD83D\uDE10 Оставить Жалобу"),
+                                new KeyboardButton("\uD83D\uDE00 Оставить отзыв")
+                        )),
+                        new KeyboardRow(List.of(
                                 new KeyboardButton("📢 Подписаться")
                         ))
                 ))

@@ -1,11 +1,13 @@
 package ru.jmdevelop.besshoptgbot.repo;
 
-public interface ClientCommandStateRepository {
+import ru.jmdevelop.besshoptgbot.models.Command;
 
-    void pushByChatId(Long chatId, Command command);
-
-    Command popByChatId(Long chatId);
-
-    void deleteAllByChatId(Long chatId);
-
-}
+//public interface ClientCommandStateRepository {
+//
+//    void pushByChatId(Long chatId, Command command);
+//
+//    Command popByChatId(Long chatId);
+//
+//    void deleteAllByChatId(Long chatId);
+//
+//}

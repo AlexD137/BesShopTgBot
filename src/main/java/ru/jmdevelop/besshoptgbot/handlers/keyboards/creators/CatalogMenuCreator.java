@@ -15,8 +15,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CatalogMenuCreator implements KeyboardCreator {
 
-    @Value("${telegram.webapp.url}")
-    private String webAppUrl;
+//    @Value("${telegram.webapp.url}")
+//    private String webAppUrl;
 
     @Override
     public boolean supports(KeyboardType type) {
@@ -28,17 +28,20 @@ public class CatalogMenuCreator implements KeyboardCreator {
         return ReplyKeyboardMarkup.builder()
                 .keyboard(List.of(
                         new KeyboardRow(List.of(
+                                new KeyboardButton("\uD83D\uDCBC  Юр. Информация")
+                        )),
+                        new KeyboardRow(List.of(
                                 new KeyboardButton("📦 Доставка"),
                                 new KeyboardButton("💳 Оплата")
                         )),
-                        new KeyboardRow(List.of(
-                                KeyboardButton.builder()
-                                        .text("Открыть каталог")
-                                        .webApp(new WebAppInfo(webAppUrl))
-                                        .build()
-                        )),
+//                        new KeyboardRow(List.of(
+//                                KeyboardButton.builder()
+//                                        .text("\uD83D\uDECD\uFE0F Открыть каталог")
+//                                        .webApp(new WebAppInfo(webAppUrl))
+//                                        .build()
+//                        )),
                                 new KeyboardRow(List.of(
-                                        new KeyboardButton("🔙 Назад")
+                                        new KeyboardButton("\uD83D\uDD19 Назад")
                                 ))
                         )).resizeKeyboard(true)
                                 .build();

@@ -5,39 +5,42 @@ import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "products")
-@Getter
-@Setter
-@ToString
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Data
 @NoArgsConstructor
-public class Product implements Serializable {
-
-    @Serial
-    private static final long serialVersionUID = 1L;
-
+public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "products_seq")
-    @SequenceGenerator(name = "products_seq", sequenceName = "products_id_seq", allocationSize = 1)
-    @EqualsAndHashCode.Include
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @Column(name = "photo_url", nullable = false)
-    private String photoUrl;
-
     @Column(nullable = false)
     private String name;
 
-    @Column(length = 2550, nullable = false)
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     @Column(nullable = false)
-    private Long price;
+    private BigDecimal price;
+
+    @Column(name = "stock_quantity", nullable = false)
+    private Integer stockQuantity;
+
+    @Column(name = "sku", unique = true)
+    private String sku;
+
+    @ElementCollection
+    @CollectionTable(name = "product_images", joinColumns = @JoinColumn(name = "product_id"))
+    private List<String> imageUrls;
+
+    @Column(name = "is_active", nullable = false)
+    private Boolean isActive = true;
 }

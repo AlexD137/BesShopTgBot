@@ -4,6 +4,5 @@ public enum KeyboardType {
     MAIN_MENU,
     SUPPORT,
     COMPLAINT,
-    CATALOG,
-    SUBSCRIPTION
+    CATALOG
 }

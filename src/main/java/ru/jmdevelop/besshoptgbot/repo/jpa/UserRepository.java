@@ -5,7 +5,7 @@ import ru.jmdevelop.besshoptgbot.models.entity.Client;
 
 import java.util.Optional;
 
-public interface ClientRepository extends JpaRepository<Client, Long> {
+public interface UserRepository extends JpaRepository<Client, Long> {
 
-    Optional<Client> findByChatId(Long chatId);
+    Optional<Client> findByUserId(Long id);
 }

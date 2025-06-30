@@ -8,6 +8,19 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 @Component
 public class ErrorHandler {
     public void handle(Update update, Exception e) {
-        log.error("Update {} processing failed: {}", update.getUpdateId(), e.getMessage());
+        String errorDetails = String.format(
+                "UpdateID: %d | ChatID: %s | Text: '%s' | Error: %s",
+                update.getUpdateId(),
+                update.hasMessage() ? update.getMessage().getChatId() : "N/A",
+                update.hasMessage() && update.getMessage().hasText()
+                        ? update.getMessage().getText()
+                        : "N/A",
+                e != null ? e.getMessage() : "Null exception"
+        );
+
+        log.error("Processing failed:\n{}", errorDetails);
+        if (e != null) {
+            log.error("Stack trace:", e);
+        }
     }
 }

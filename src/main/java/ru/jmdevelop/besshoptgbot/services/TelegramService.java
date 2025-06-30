@@ -1,6 +1,7 @@
 package ru.jmdevelop.besshoptgbot.services;
 
-import ru.jmdevelop.besshoptgbot.models.dom.CartItem;
+
+import ru.jmdevelop.besshoptgbot.models.entity.CartItem;
 
 public interface TelegramService {
     void sendCartMessage(Long chatId, CartItem item, int currentPage, int totalPages);

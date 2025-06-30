@@ -2,40 +2,48 @@ package ru.jmdevelop.besshoptgbot.models.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
-import java.io.Serial;
-import java.io.Serializable;
-import java.util.Objects;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-@Data
 @Entity
-@Table(name = "clients")
-public class Client implements Serializable {
-
-    @Serial
-    private static final long serialVersionUID = 1L;
-
+@Table(name = "users")
+@Data
+@NoArgsConstructor
+public class Client {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "clients_seq")
-    @SequenceGenerator(name = "clients_seq", sequenceName = "clients_id_seq", allocationSize = 1)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Column(name = "chat_id", unique = true, nullable = false)
-    private Long chatId;
+    @Column(name = "telegram_chat_id", unique = true)
+    private Long userId;
+
+    @Column(name = "telegram_username")
+    private String telegramUsername;
+
+    @Column(unique = true)
+    private String email;
 
     @Column
-    private String name;
+    private boolean isActive;
+
+    private String firstName;
+
+    private String lastName;
+
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserRequest> requests = new ArrayList<>();
 
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column
-    private String city;
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
 
-    @Column
-    private String address;
-
-    @Column(name = "is_active", nullable = false)
-    private boolean active;
-
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 }
+
