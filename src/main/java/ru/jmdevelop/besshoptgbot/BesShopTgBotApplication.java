@@ -4,7 +4,7 @@ package ru.jmdevelop.besshoptgbot;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import ru.jmdevelop.besshoptgbot.Config.BotProperties;
+import ru.jmdevelop.besshoptgbot.сonfig.BotProperties;
 
 
 @SpringBootApplication
