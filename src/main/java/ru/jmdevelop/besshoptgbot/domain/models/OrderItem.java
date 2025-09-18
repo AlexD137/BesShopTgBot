@@ -1,5 +1,7 @@
 package ru.jmdevelop.besshoptgbot.domain.models;
 
+import ru.jmdevelop.besshoptgbot.domain.models.product.Product;
+
 import java.math.BigDecimal;
 
 public class OrderItem {

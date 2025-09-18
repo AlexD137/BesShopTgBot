@@ -1,7 +1,8 @@
-package ru.jmdevelop.besshoptgbot.domain.models;
+package ru.jmdevelop.besshoptgbot.domain.models.product;
 
 
 import lombok.Data;
+
 import java.math.BigDecimal;
 
 @Data
@@ -20,4 +21,6 @@ public class Product {
     private Integer stockQuantity;
     private String category;
     private BigDecimal deliveryCost;
+    private ProductMedia media;
+    private ProductReviews reviews;
 }

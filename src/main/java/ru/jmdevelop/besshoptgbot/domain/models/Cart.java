@@ -1,5 +1,7 @@
 package ru.jmdevelop.besshoptgbot.domain.models;
 
+import ru.jmdevelop.besshoptgbot.domain.models.user.User;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,7 @@
 package ru.jmdevelop.besshoptgbot.domain.models;
 
 import lombok.Data;
+import ru.jmdevelop.besshoptgbot.domain.models.user.User;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
