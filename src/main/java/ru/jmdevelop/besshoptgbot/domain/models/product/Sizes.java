@@ -1,6 +1,6 @@
 package ru.jmdevelop.besshoptgbot.domain.models.product;
 
-public enum Size {
+public enum Sizes {
     XS,
     S,
     M,

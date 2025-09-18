@@ -1,9 +1,8 @@
 package ru.jmdevelop.besshoptgbot.domain.models.user;
 
 import lombok.Data;
-import ru.jmdevelop.besshoptgbot.domain.models.Cart;
-import ru.jmdevelop.besshoptgbot.domain.models.Order;
-import ru.jmdevelop.besshoptgbot.domain.models.Role;
+import ru.jmdevelop.besshoptgbot.domain.models.cart.Cart;
+import ru.jmdevelop.besshoptgbot.domain.models.order.Order;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -19,7 +18,6 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
-    private Map<Long, Map<FormType, String>> appeals;
     private LocalDate birthDate;
     private LocalDateTime firstActivity;
     private LocalDateTime lastActivity;
@@ -29,6 +27,7 @@ public class User {
     private boolean havePermissions;
     private List<Order> orders = new ArrayList<>();
     private Cart cart;
+    private List<Notification> notifications = new ArrayList<>();
 
 
 }

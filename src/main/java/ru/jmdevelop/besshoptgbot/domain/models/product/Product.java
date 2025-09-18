@@ -9,13 +9,8 @@ import java.math.BigDecimal;
 public class Product {
     private Long id;
     private String name;
-    private Size size;
+    private Sizes size;
     private String color;
-    private String type;
-    private List<Photo> photo;
-    private List<Video> video;
-    private Rating rate;
-    private Reviews reviews;
     private String description;
     private BigDecimal price;
     private Integer stockQuantity;

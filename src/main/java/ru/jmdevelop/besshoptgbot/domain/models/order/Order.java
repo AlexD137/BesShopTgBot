@@ -1,6 +1,7 @@
-package ru.jmdevelop.besshoptgbot.domain.models;
+package ru.jmdevelop.besshoptgbot.domain.models.order;
 
 import lombok.Data;
+import ru.jmdevelop.besshoptgbot.domain.models.product.PromoCode;
 import ru.jmdevelop.besshoptgbot.domain.models.user.User;
 
 import java.math.BigDecimal;
@@ -18,6 +19,9 @@ public class Order {
     private String deliveryAddress;
     private List<OrderItem> items = new ArrayList<>();
     private BigDecimal totalAmount;
+    private PromoCode promoCode;
+    private BigDecimal discountAmount;
+    private BigDecimal finalAmount;
 
 }
 

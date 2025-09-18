@@ -1,4 +1,4 @@
-package ru.jmdevelop.besshoptgbot.domain.models;
+package ru.jmdevelop.besshoptgbot.domain.models.cart;
 
 import ru.jmdevelop.besshoptgbot.domain.models.product.Product;
 

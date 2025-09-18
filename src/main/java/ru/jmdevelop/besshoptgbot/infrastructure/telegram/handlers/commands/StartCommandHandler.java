@@ -11,7 +11,7 @@ import ru.jmdevelop.besshoptgbot.infrastructure.telegram.handlers.keyboards.fact
 import ru.jmdevelop.besshoptgbot.infrastructure.telegram.handlers.keyboards.factory.KeyboardType;
 import ru.jmdevelop.besshoptgbot.domain.models.Command;
 import ru.jmdevelop.besshoptgbot.infrastructure.persistence.entity.Client;
-import ru.jmdevelop.besshoptgbot.domain.repo.jpa.UserRepository;
+import ru.jmdevelop.besshoptgbot.domain.repo.UserRepository;
 import ru.jmdevelop.besshoptgbot.domain.services.UserContextService;
 
 

@@ -1,26 +1,18 @@
-//package ru.jmdevelop.besshoptgbot.repo;
-//
-//
-//import ru.jmdevelop.besshoptgbot.models.entity.CartItem;
-//
-//import java.util.List;
-//
-//public interface CartRepository {
-//
-//    void saveCartItem(Long chatId, CartItem cartItem);
-//
-//    void updateCartItem(Long chatId, CartItem cartItem);
-//
-//    void deleteCartItem(Long chatId, Integer cartItemId);
-//
-//    CartItem findCartItemByChatIdAndProductId(Long chatId, Integer productId);
-//
-//    List<CartItem> findAllCartItemsByChatId(Long chatId);
-//
-//    void deleteAllCartItemsByChatId(Long chatId);
-//
-//    void updatePageNumberByChatId(Long chatId, Integer pageNumber);
-//
-//    Integer findPageNumberByChatId(Long chatId);
-//
-//}
+package ru.jmdevelop.besshoptgbot.domain.repo;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import ru.jmdevelop.besshoptgbot.infrastructure.persistence.entity.Cart;
+
+import java.util.Optional;
+
+public interface CartRepository {
+    Optional<Cart> findById(Long id);
+    Optional<Cart> findByUserId(Long userId);
+    Cart save(Cart cart);
+    void deleteById(Long id);
+    void clearCart(Long userId);
+
+    // Специфичные методы
+    boolean hasItems(Long userId);
+    int getItemsCount(Long userId);
+}
